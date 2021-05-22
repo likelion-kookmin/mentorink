@@ -7,6 +7,10 @@
     <title>Main Page</title>
 </head>
 <body>
-    main
+    {% if user.is_authenticated %}
+    {{user.username}}
+    {% endif %}
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'logout' %}">Logout</a>
 </body>
 </html>
