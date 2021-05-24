@@ -7,6 +7,9 @@
     <title>Main Page</title>
 </head>
 <body>
+
+    <a href="{%url 'new' %}">Write</a>
+
     <!-- 로그인이 된 상태 -->
     {% if user.is_authenticated %}
     <span>ID: {{user.username}} </span><br>
@@ -21,6 +24,8 @@
     <a href="{% url 'login' %}">Login</a>
     <a href="{% url 'signup' %}">Signup</a>
     {% endif %}
+
+
 
 </body>
 </html>

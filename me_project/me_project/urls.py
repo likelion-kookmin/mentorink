@@ -9,4 +9,6 @@ urlpatterns = [
     path('join/', views.join, name='join'),
     path('mypage/', views.mypage, name='mypage'),
     path('list/', views.list, name='list'),
+    path('new/',views.new,name='new'),
+    path('create/', views.create,name='create')
 ]
