@@ -10,5 +10,6 @@ urlpatterns = [
     path('mypage/', views.mypage, name='mypage'),
     path('list/', views.list, name='list'),
     path('new/',views.new,name='new'),
-    path('create/', views.create,name='create')
+    path('create/', views.create,name='create'),
+    path('<str:id>', views.detail, name='detail')
 ]

@@ -8,6 +8,14 @@
 </head>
 <body>
 
+    <h1>당신의 아이디어를 검색해보세요.</h1>
+    <br>
+    <form action="{% url 'list' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="search">
+        <input type="submit"></input>
+    </form>
+
     <a href="{%url 'new' %}">Write</a>
 
     <!-- 로그인이 된 상태 -->
