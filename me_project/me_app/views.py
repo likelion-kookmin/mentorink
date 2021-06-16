@@ -1,6 +1,7 @@
 from .models import Idea
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
+from .form import IdeaForm, CommentForm
 
 
 def main(request):
@@ -42,3 +43,16 @@ def create(request):
 def detail(request, id):
     ideas = get_object_or_404(Idea, pk=id)
     return render(request, 'detail.html', {'ideas': ideas})
+
+def add_comment_to_idea(request, pk):
+    post = get_object_or_404(Idea, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_idea.html', {'form': form})
