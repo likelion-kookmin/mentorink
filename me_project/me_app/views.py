@@ -1,7 +1,7 @@
 from .models import Idea
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from .form import IdeaForm, CommentForm
+from .forms import CommentForm
 
 
 def main(request):

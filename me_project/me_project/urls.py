@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from me_app import views
 
 urlpatterns = [
@@ -12,5 +12,5 @@ urlpatterns = [
     path('new/',views.new,name='new'),
     path('create/', views.create,name='create'),
     path('<str:id>', views.detail, name='detail'),
-    url(r'^idea/(?P<pk>\d+)/comment/$', views.add_comment_to_idea, name='add_comment_to_idea'),
+    re_path(r'^idea/(?P<pk>\d+)/comment/$', views.add_comment_to_idea, name='add_comment_to_idea'),
 ]
