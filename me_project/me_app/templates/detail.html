@@ -9,22 +9,23 @@
     <title>Detail Page</title>
 </head>
 <body>
-    <h1>{{ideas.title}}<br></h1>
+    <h1>{{idea.title}}<br></h1>
     <hr>
-    {{ideas.writer}}<br>
-    {{ideas.body}}<br>
-    {{ideas.pud_date}}<br>
+    {{idea.writer}}<br>
+    {{idea.body}}<br>
+    {{idea.pud_date}}<br>
     <hr>
-    {% for comment in post.comments.all %} 
+
+    {% for comment in comments %} 
     <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
+        <div class="date">{{ comment.created_at }}</div>
         <strong>{{ comment.author }}</strong>
-        <p>{{ comment.text|linebreaks }}</p>
+        <p>{{ comment.message | linebreaks }}</p>
     </div>
 {% empty %}
     <p>No comments here yet :(</p>
 {% endfor %}
-<a class="btn btn-default" href="{% url 'add_comment_to_idea' pk=idea.pk %}">Add comment</a>
+<a class="btn btn-default" href="{% url 'add_comment_to_idea' idea.id %}">Add comment</a>
 </body>
 </html>
 {% endblock %}

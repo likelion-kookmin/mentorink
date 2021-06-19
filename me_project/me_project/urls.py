@@ -12,5 +12,5 @@ urlpatterns = [
     path('new/',views.new,name='new'),
     path('create/', views.create,name='create'),
     path('<str:id>', views.detail, name='detail'),
-    re_path(r'^idea/(?P<pk>\d+)/comment/$', views.add_comment_to_idea, name='add_comment_to_idea'),
+    path('idea/<int:idea_id>/comment/', views.add_comment_to_idea, name='add_comment_to_idea'),
 ]

@@ -1,4 +1,4 @@
-from .models import Idea
+from .models import Comment, Idea
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .forms import CommentForm
@@ -41,18 +41,23 @@ def create(request):
 
 
 def detail(request, id):
-    ideas = get_object_or_404(Idea, pk=id)
-    return render(request, 'detail.html', {'ideas': ideas})
+    idea = get_object_or_404(Idea, pk=id)
+    comments = Comment.objects.filter(post = idea)
+    return render(request, 'detail.html', {'idea': idea, 'comments' : comments})
 
-def add_comment_to_idea(request, pk):
-    post = get_object_or_404(Idea, pk=pk)
+def add_comment_to_idea(request, idea_id):
+    post = get_object_or_404(Idea, pk=idea_id)
+    form = CommentForm()
+    response = {
+        'form': form,
+        'idea_id': idea_id,
+    }
+
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect('detail', pk=post.pk)
-    else:
-        form = CommentForm()
-    return render(request, 'add_comment_to_idea.html', {'form': form})
+            return redirect('detail', post.id)
+    return render(request, 'add_comment_to_idea.html', response)
