@@ -42,11 +42,11 @@ def create(request):
 
 def detail(request, id):
     idea = get_object_or_404(Idea, pk=id)
-    comments = Comment.objects.filter(post = idea)
+    comments = Comment.objects.filter(idea = idea)
     return render(request, 'detail.html', {'idea': idea, 'comments' : comments})
 
 def add_comment_to_idea(request, idea_id):
-    post = get_object_or_404(Idea, pk=idea_id)
+    idea = get_object_or_404(Idea, pk=idea_id)
     form = CommentForm()
     response = {
         'form': form,
@@ -57,7 +57,7 @@ def add_comment_to_idea(request, idea_id):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post = post
+            comment.idea = idea
             comment.save()
-            return redirect('detail', post.id)
+            return redirect('detail', idea.id)
     return render(request, 'add_comment_to_idea.html', response)
