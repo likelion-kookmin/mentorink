@@ -1,22 +1,28 @@
 {% extends 'base.html' %}
 {% block container %}
+{% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
+    <style>
+        body {
+            background-image: url("{% static 'background.jpg' %}");
+            background-size : cover;
+        }
+    </style>
 </head>
 <body>
-
-    <h1>당신의 아이디어를 검색해보세요.</h1>
+    <br><br><br><br><br>
+    <b><p style="color:white; text-align: center; font-size:50px;">당신의 아이디어를 검색해보세요.</p></b>
     <br>
-    <form action="{% url 'list' %}" method="POST">
+    <form action="{% url 'list' %}" method="POST" style="text-align: center;">
         {% csrf_token %}
-        <input type="text" name="search">
-        <input type="submit"></input>
+        <input type="text" name="search" style="width:800px; height:70px; font-size:30px;">
+        <input type="submit" style="width:80px; height:70px; font-size:30px;" value="검색"></input>
     </form>
 
     <!-- 로그인이 된 상태 -->
