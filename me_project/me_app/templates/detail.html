@@ -21,7 +21,8 @@
         <strong>{{ comment.author }}</strong>
         <p>{{ comment.message | linebreaks }}</p>
     </div>
-{% empty %}
+    
+    {% empty %}
     <p>No comments here yet :(</p>
 {% endfor %}
 <a class="btn btn-default" href="{% url 'add_comment_to_idea' idea.id %}">Add comment</a>
