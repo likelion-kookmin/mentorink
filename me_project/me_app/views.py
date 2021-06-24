@@ -37,14 +37,34 @@ def create(request):
         new_idea.writer = request.POST['writer']
         new_idea.body = request.POST['body']
         new_idea.pud_date = timezone.now()
+        new_idea.image = request.FILES['image']
         new_idea.save()
     return redirect('detail', new_idea.id)
 
+def update(request, idea_id):
+    if(request.method == 'POST'):
+        edit_idea = get_object_or_404(Idea, pk=idea_id)
+        edit_idea.title = request.POST['title']
+        edit_idea.writer = request.POST['writer']
+        edit_idea.body = request.POST['body']
+        edit_idea.pud_date = timezone.now()
+        edit_idea.image = request.FILES['image']
+        edit_idea.save()
+    return redirect('detail', edit_idea.id)
 
-def detail(request, id):
-    idea = get_object_or_404(Idea, pk=id)
+def delete(request, idea_id):
+    delete_idea= get_object_or_404(Idea, pk=idea_id)
+    delete_idea.delete()
+    return redirect('main')
+
+def detail(request, idea_id):
+    idea = get_object_or_404(Idea, pk=idea_id)
     comments = Comment.objects.filter(idea = idea)
     return render(request, 'detail.html', {'idea': idea, 'comments' : comments})
+
+def edit(request, idea_id):
+    idea = get_object_or_404(Idea, pk=idea_id)
+    return render(request, 'edit.html', {'idea':idea})
 
 def add_comment_to_idea(request, idea_id):
     idea = get_object_or_404(Idea, pk=idea_id)
