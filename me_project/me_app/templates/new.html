@@ -5,17 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Write</title>
+    <title>Write Your Idea</title>
+    <style></style>
 </head>
 <body>
-    <h1>Write Your Idea :)</h1>
+    <br><br>
+    <h1 style="text-align: center; font-size: 50px;">당신만의 기발한 아이디어를 공유해 보세요!</h1><br>
+    <div class="writing page" style="text-align: center;">
     <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data" >
         {%csrf_token%}
-        <p>제목 : <input type="text" name="title" value="{{Idea.title}}"></p>
-        <p>작성자 : <input type="text" name="writer" value="{{Idea.writer}}"></p>
-        본문 <br> <textarea name="body" cols="50" rows="10" value="{{Idea.body}}"></textarea><p>
+        <p>제목 <input type="text" name="title" style="width: 300px;"></p>
+        <p>작성자 <input type="text" name="writer" style="width: 300px;"></p>
+        <p>사진첨부 <input type="file" name="image"></p>
+        <br> <textarea name="body" cols="100" rows="16" ></textarea><p>
         <button type="submit"> submit </button>
-    </form>
+    </form></div>
 </body>
 </html>
 {% endblock %}
