@@ -2,7 +2,7 @@ from .models import Comment, Idea
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .forms import CommentForm
-
+from django.db.models import Count
 
 def main(request):
     return render(request, 'main.html')
@@ -23,7 +23,8 @@ def mypage(request):
 def list(request):
     search = request.POST.get('search')
     ideas = Idea.objects.filter(title__contains=search)
-    return render(request, 'list.html', {'ideas': ideas})
+    count=ideas.count()
+    return render(request, 'list.html', {'ideas': ideas, 'search':search, 'count':count})
 
 
 def new(request):

@@ -14,14 +14,24 @@
             background-size : cover;
         }
     </style>
+     <script>
+        function chk() {
+            if (document.getElementById("searchtxt").value == "") {
+                alert("내용을 입력해주세요");
+                return false;
+            }
+            else
+            document.search.submit();
+        }
+        </script>
 </head>
 <body>
     <br><br><br><br><br>
     <b><p style="color:white; text-align: center; font-size:50px;">당신의 아이디어를 검색해보세요.</p></b>
     <br>
-    <form action="{% url 'list' %}" method="POST" style="text-align: center;">
+    <form name="search" action="{% url 'list' %}" method="POST" style="text-align: center;" onsubmit="return chk();">
         {% csrf_token %}
-        <input type="text" name="search" style="width:800px; height:70px; font-size:30px;">
+        <input type="text" id="searchtxt" name="search" style="width:800px; height:70px; font-size:30px;">
         <input type="submit" style="width:80px; height:70px; font-size:30px;" value="검색"></input>
     </form>
 
@@ -32,4 +42,5 @@
 
 </body>
 </html>
+
 {% endblock %}

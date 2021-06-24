@@ -6,18 +6,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List Page</title>
+    <style>
+        a {
+            text-decoration-line: none;
+            color: black;
+            }
+        .list {
+            margin-left: 10%;
+            margin-right: 10%;
+            width: 80%;
+            /* background: red; */
+        }
+        .list:hover {
+            background: #bfdbf0;
+        }
+        .line {
+            margin-right: 10%;
+            margin-left: 10%;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            background: #0FBCFF;
+            height: 1px;
+            width: 80%;
+        }
+        .none{
+            margin-left: 10%;
+            margin-right: 10%;
+            width: 80%;
+        }
+    </style>
 </head>
 <body>
-    <h1>검색 결과</h1>
+    <br><br><br>
+    <b><p style="text-align: center; font-size:40px;">{{search}}에 대한 검색 결과가 {{count}}개 검색되었습니다.</p></b>
+    <div class="line"></div>
+
     {% for idea in ideas %}
-    <div>
-    <a href="{%url 'detail' idea.id%}">
-        <h3>{{idea.title}}</h3>
-    </a>
-    {{idea.writer}}<br>
-    {{idea.pud_date}}
+    
+    <div class="list">
+        <a href="{%url 'detail' idea.id%}" >
+        <b><p style="font-size:30px;">{{idea.title}}</p></b>
+        </a>
+        
+        <p style="font-size:15px; color: gray;">작성자: {{idea.writer}}</p>
+        <p style="font-size:15px; color: gray;">작성시간: {{idea.pud_date}}</p>
+        <p style="font-size:20px; color: gray;">{{idea.summary}}</p>
+        {% if idea.count > 0 %}
+        <p style="font-size:15px; color: #0FBCFF;">{{idea.count}}개의 댓글이 달려있습니다.</p>
+        {% endif %}
+        
     </div>
-    <hr>
+
+    <div class="line"></div>
+    {% empty %}
+    <div class="none">
+        <p style="text-align: center; font-size:30px;">{{search}}에 대한 글이 없습니다. :(</p>
+        <!-- 로그인이 된 상태 -->
+        {% if user.is_authenticated %}
+        <p style="text-align: center; font-size:30px;"><a href="{%url 'new' %}">글 작성하기</a></p>
+        {% endif %}
+    </div>
+    
     {% endfor %}
 </body>
 </html>
