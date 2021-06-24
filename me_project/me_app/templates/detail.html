@@ -11,9 +11,14 @@
     <h1>{{idea.title}}<br></h1>
     <hr>
     {{idea.writer}}<br>
-    {{idea.body}}<br>
     {{idea.pud_date}}<br>
+    {% if idea.image %}
+    <img src="{{idea.image.url}}" width="100"><br>
+    {% endif %}
+    {{idea.body}}<br>
     <hr>
+    <a href="{% url 'edit' idea.id %}">글 수정</a>
+    <a href="{% url 'delete' idea.id %}">글 삭제</a>
 
     {% for comment in comments %} 
     <div class="comment">
