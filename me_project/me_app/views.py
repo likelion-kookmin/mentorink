@@ -56,6 +56,7 @@ def create(request):
         new_idea.writer = request.POST['writer']
         new_idea.body = request.POST['body']
         new_idea.pud_date = timezone.now()
+        new_idea.image = request.FILES['image']
         new_idea.save()
     return redirect('detail', new_idea.id)
 
