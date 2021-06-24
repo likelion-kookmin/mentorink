@@ -2,13 +2,15 @@ from django.conf import settings
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.db.models import Count
+from django.db.models.fields import NullBooleanField
+from django.forms.fields import ImageField
 
 class Idea(models.Model):
     title = models.CharField(max_length=150)
     writer = models.CharField(max_length=100)
     body = models.TextField(null=True, default='')
     pud_date = models.DateTimeField()
-    
+    image = models.ImageField(upload_to='idea/', blank=True, null=True)
     def summary(self):
         return self.body[:30]
 
