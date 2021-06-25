@@ -35,7 +35,6 @@ def myq(request):
 def myc(request):
     mycomment = request.POST.get('mycomment')
     comments=Comment.objects.filter(author=request.user)
-    #comments = Comment.objects.filter(~Q(author == request.user))
     return render(request,'myc.html',{'comments': comments})
 
 
