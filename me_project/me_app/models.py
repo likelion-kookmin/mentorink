@@ -11,6 +11,7 @@ class Idea(models.Model):
     body = models.TextField(null=True, default='')
     pud_date = models.DateTimeField()
     image = models.ImageField(upload_to='idea/', blank=True, null=True)
+    
     def summary(self):
         return self.body[:30]
 
