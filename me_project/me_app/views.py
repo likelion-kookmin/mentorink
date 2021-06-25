@@ -7,8 +7,7 @@ from account.models import UserModel
 from account.forms import RegisterForm
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
-from django.db.models.query_utils import Q
+
 
 def main(request):
     return render(request, 'main.html')
