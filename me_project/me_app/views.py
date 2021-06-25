@@ -2,7 +2,11 @@ from .models import Comment, Idea
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .forms import CommentForm
-
+from django.db.models import Count
+from account.models import UserModel
+from account.forms import RegisterForm
+from django.db import models
+from django.conf import settings
 
 def main(request):
     return render(request, 'main.html')
@@ -19,11 +23,26 @@ def join(request):
 def mypage(request):
     return render(request, 'mypage.html')
 
+def myinfo(request):
+    return render(request,'myinfo.html')
+
+def myq(request):
+    myquest = request.POST.get('myquest')
+    ideas = Idea.objects.all()
+    return render(request,'myq.html',{'ideas': ideas})
+
+def myc(request):
+    mycomment = request.POST.get('mycomment')
+    comments = Comment.objects.all()
+    return render(request,'myc.html',{'comments': comments})
+
+
 
 def list(request):
     search = request.POST.get('search')
     ideas = Idea.objects.filter(title__contains=search)
-    return render(request, 'list.html', {'ideas': ideas})
+    count=ideas.count()
+    return render(request, 'list.html', {'ideas': ideas, 'search':search, 'count':count})
 
 
 def new(request):
