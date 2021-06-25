@@ -13,6 +13,50 @@
             background-image: url("{% static 'background.jpg' %}");
             background-size : cover;
         }
+
+        a {
+            text-decoration-line: none;
+            color: #e9f4fb;
+            }
+        
+        input[type="submit"] {
+            border: 0px solid;
+            background: #2691d9;
+            border-radius: 10px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+        }
+
+        input[type="text"] {
+            border: 0px solid;
+            background: white;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .text {
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+
+        .write {
+            border: 0px solid;
+            background: #2691d9;
+            border-radius: 10px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            width: 300px;
+            height: 50px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
     </style>
      <script>
         function chk() {
@@ -27,17 +71,27 @@
 </head>
 <body>
     <br><br><br><br><br>
-    <b><p style="color:white; text-align: center; font-size:50px;">당신의 아이디어를 검색해보세요.</p></b>
+    <div class="text">
+        <b><p style="color:#e9f4fb; text-align: center; font-size:60px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Mentorink</p></b>
+    </div>
     <br>
     <form name="search" action="{% url 'list' %}" method="POST" style="text-align: center;" onsubmit="return chk();">
         {% csrf_token %}
-        <input type="text" id="searchtxt" name="search" style="width:800px; height:70px; font-size:30px;">
-        <input type="submit" style="width:80px; height:70px; font-size:30px;" value="검색"></input>
+        <div class='input'>
+            <input type="text" id="searchtxt" name="search" style="width:800px; height:70px; font-size:30px;" placeholder="아이디어를 검색하세요.">
+            <input type="submit" style="width:80px; height:70px; font-size:30px;" value="검색"></input>
+        </div>
     </form>
 
     <!-- 로그인이 된 상태 -->
     {% if user.is_authenticated %}
-    <a href="{%url 'new' %}">글 작성</a>
+    <br><br>
+    <div class="text">
+        <p style="color:#e9f4fb; text-align: center; font-size:40px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">아이디어를 공유해보세요.</p>
+    </div>   
+    <div class="write">
+        <p style="text-align: center; font-size:35px; color:#e9f4fb;"><a id="" href="{%url 'new' %}">글 작성하기</a></p>
+    </div>
     {% endif %}
 
 </body>

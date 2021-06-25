@@ -17,38 +17,49 @@
             background: #0FBCFF;
             height: 1px;
         }
+
     </style>
 </head>
 <body>
-<<<<<<< HEAD
-    <h1>{{idea.title}}<br></h1>
     <hr>
-    {{idea.writer}}<br>
-    {{idea.pud_date}}<br>
-    {% if idea.image %}
-    <img src="{{idea.image.url}}" width="100"><br>
-    {% endif %}
-    {{idea.body}}<br>
-    <hr>
-    <a href="{% url 'edit' idea.id %}">글 수정</a>
-    <a href="{% url 'delete' idea.id %}">글 삭제</a>
 
-=======
     <div class="list">
     <br>
     <b><p style="font-size:45px;">{{idea.title}}</p></b>
     <p style="text-align: left; font-size: 15px;">작성자: {{idea.writer}}</p>
     <p style="text-align: left; font-size: 15px;">작성일: {{idea.pud_date}}</p>
+    <a href="{% url 'edit' idea.id %}" style="text-align: right; 
+    font-size: 14px;
+    border: 0px solid;
+    color: #2691d9;
+    border-radius: 4px;
+    font-weight: 450;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;">글 수정</a> &nbsp;
+    <a href="{% url 'delete' idea.id %}" style="text-align: right;
+    font-size: 14px;
+    border: 0px solid;
+    color: #2691d9;
+    border-radius: 4px;
+    font-weight: 450;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;">글 삭제</a>
     <div class="line"></div>
     <br>
+    {% if idea.image %}
+    <img src="{{idea.image.url}}" width="240"><br>
+    {% endif %}
     <p style="text-align: left; font-size: 25px;">{{idea.body}}</p>
     <br>
-    <div class="line"></div>
->>>>>>> 28838e68dbfb1f628dad9b5656df121d9fb1a3f3
+    <div class="line">
+    </div>
+    <br>
     {% for comment in comments %} 
     <div class="comment">
         <b><p style="text-align: left; font-size: 20px;">{{ comment.author }}님의 댓글</p></b>
-        <p style="text-align: left; font-size: 15px;">작성일: {{ comment.created_at }}</p>
+        <p style="text-align: left; font-size: 20px;">작성일: {{ comment.created_at }}</p>
         <p style="text-align: left; font-size: 20px;">{{ comment.message }}</p>
     </div>
     <div class="line"></div>

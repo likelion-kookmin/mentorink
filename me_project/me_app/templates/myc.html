@@ -1,0 +1,29 @@
+{% block container %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my comment page</title>
+</head>
+
+<body>
+    <h1>내가 쓴 comment</h1>
+    {% for comment in comments %}
+    <div>
+           {{comment.author}}
+            <h3>제목: {{comment.idea.title}}</h3>
+            작성자: {{user.get_username}}
+        </a>
+        작성한 코멘트:
+        {{comment.message}}
+        
+        
+    </div>
+    <hr>
+
+    {% endfor %}
+</body>
+
+</html>
+{% endblock %}

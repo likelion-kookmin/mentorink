@@ -8,6 +8,7 @@ from account.forms import RegisterForm
 from django.db import models
 from django.conf import settings
 
+
 def main(request):
     return render(request, 'main.html')
 
@@ -28,12 +29,12 @@ def myinfo(request):
 
 def myq(request):
     myquest = request.POST.get('myquest')
-    ideas = Idea.objects.all()
+    ideas = Idea.objects.filter(writer=request.user.username)
     return render(request,'myq.html',{'ideas': ideas})
 
 def myc(request):
     mycomment = request.POST.get('mycomment')
-    comments = Comment.objects.all()
+    comments=Comment.objects.filter(author=request.user)
     return render(request,'myc.html',{'comments': comments})
 
 
@@ -51,14 +52,22 @@ def new(request):
 
 def create(request):
     if(request.method == 'POST'):
-        new_idea = Idea()
-        new_idea.title = request.POST['title']
-        new_idea.writer = request.POST['writer']
-        new_idea.body = request.POST['body']
-        new_idea.pud_date = timezone.now()
-        new_idea.image = request.FILES['image']
-        new_idea.save()
+         new_idea = Idea()
+         new_idea.title = request.POST['title']
+         new_idea.writer = request.POST['writer']
+         new_idea.body = request.POST['body']
+         new_idea.pud_date = timezone.now()
+         
+         if not request.FILES:
+            new_idea.image = ""
+            new_idea.save()
+            
+         else:
+            new_idea.image = request.FILES['image']
+            new_idea.save()
+
     return redirect('detail', new_idea.id)
+
 
 def update(request, idea_id):
     if(request.method == 'POST'):

@@ -34,11 +34,42 @@
             margin-right: 10%;
             width: 80%;
         }
+
+        input[type="submit"] {
+            border: 0px solid;
+            background: #2691d9;
+            border-radius: 10px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+        }
+
+        input[type="text"] {
+            border: 1px solid;
+            background: white;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+        }
     </style>
 </head>
 <body>
     <br><br><br>
+    {% if count > 0 %}
     <b><p style="text-align: center; font-size:40px;">{{search}}에 대한 검색 결과가 {{count}}개 검색되었습니다.</p></b>
+    {% else %}
+    <b><p style="text-align: center; font-size:40px;">{{search}}에 대한 검색 결과가 없습니다.</p></b>
+    <form name="search" action="{% url 'list' %}" method="POST" style="text-align: center;" onsubmit="return chk();">
+        {% csrf_token %}
+        <div class='input'>
+            <input type="text" id="searchtxt" name="search" style="width:800px; height:70px; font-size:30px;" placeholder="다른 아이디어를 검색해보세요.">
+            <input type="submit" style="width:80px; height:70px; font-size:30px;" value="검색"></input>
+        </div>
+    </form>
+    {% endif %}
+   
     <div class="line"></div>
 
     {% for idea in ideas %}
@@ -60,7 +91,7 @@
     <div class="line"></div>
     {% empty %}
     <div class="none">
-        <p style="text-align: center; font-size:30px;">{{search}}에 대한 글이 없습니다. :(</p>
+        <p style="text-align: center; font-size:30px;">{{search}}에 대한 글을 작성해보세요 :)</p>
         <!-- 로그인이 된 상태 -->
         {% if user.is_authenticated %}
         <p style="text-align: center; font-size:30px;"><a href="{%url 'new' %}">글 작성하기</a></p>

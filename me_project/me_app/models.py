@@ -1,22 +1,16 @@
 from django.conf import settings
 from django.db import models
 from django.db.models.deletion import CASCADE
-<<<<<<< HEAD
 from django.db.models.fields import NullBooleanField
 from django.forms.fields import ImageField
-
-=======
 from django.db.models import Count
->>>>>>> 28838e68dbfb1f628dad9b5656df121d9fb1a3f3
 
 class Idea(models.Model):
     title = models.CharField(max_length=150)
     writer = models.CharField(max_length=100)
     body = models.TextField(null=True, default='')
     pud_date = models.DateTimeField()
-<<<<<<< HEAD
     image = models.ImageField(upload_to='idea/', blank=True, null=True)
-=======
     
     def summary(self):
         return self.body[:30]
@@ -25,7 +19,6 @@ class Idea(models.Model):
         counts = Comment.objects.filter(idea=self.pk)
         n=counts.count()
         return n
->>>>>>> 28838e68dbfb1f628dad9b5656df121d9fb1a3f3
 
 class Comment(models.Model):
     idea = models.ForeignKey(Idea, on_delete=models.CASCADE)
