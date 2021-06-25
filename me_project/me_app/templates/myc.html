@@ -10,7 +10,6 @@
 <body>
     <h1>내가 쓴 comment</h1>
     {% for comment in comments %}
-    {% if comment.author == request.user %}
     <div>
            {{comment.author}}
             <h3>제목: {{comment.idea.title}}</h3>
@@ -22,7 +21,6 @@
         
     </div>
     <hr>
-    {% endif %}
     {% endfor %}
 </body>
 

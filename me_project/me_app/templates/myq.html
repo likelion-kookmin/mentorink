@@ -15,7 +15,6 @@
     
     {% for idea in ideas %}
     <div>
-        {% if idea.writer == user.get_username%}
         <a href="{%url 'detail' idea.id%}">
             <h3>{{idea.title}}</h3>
         </a>
@@ -23,7 +22,6 @@
         {{idea.pud_date}}
     </div>
     <hr>
-    {% endif %}
     {% endfor %}
 </body>
 
