@@ -8,6 +8,7 @@ from account.forms import RegisterForm
 from django.db import models
 from django.conf import settings
 
+
 def main(request):
     return render(request, 'main.html')
 
@@ -28,12 +29,12 @@ def myinfo(request):
 
 def myq(request):
     myquest = request.POST.get('myquest')
-    ideas = Idea.objects.all()
+    ideas = Idea.objects.filter(writer=request.user.username)
     return render(request,'myq.html',{'ideas': ideas})
 
 def myc(request):
     mycomment = request.POST.get('mycomment')
-    comments = Comment.objects.all()
+    comments=Comment.objects.filter(author=request.user)
     return render(request,'myc.html',{'comments': comments})
 
 
