@@ -1,3 +1,6 @@
+{% extends 'sidebar.html' %}
+{% block container %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +10,19 @@
     <title>my information</title>
 </head>
 <body>
-    이름: {{user.get_username}}<br>
-    position: {{user.position}}
+    - MY INFO<br>
+    
+    <h3>
+        <ul>
+            <br>
+        <li>이름: {{user.get_username}}</li><br>
+        <li>NickName: {{user.nickname}}</li><br>
+        <li>position: {{user.position}}</li>
+        
+        </ul>
+    </h3>
 
 </body>
 </html>
+
+{% endblock %}
