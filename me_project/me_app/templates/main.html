@@ -57,6 +57,17 @@
             transform: translateX(-50%);
         }
 
+        .copyright {
+            font-family:'Courier New', Courier, monospace;
+            text-align: center;
+            background-color: #000000;
+            color:white;
+            padding-top: 1%;
+            height: 50px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
     </style>
      <script>
         function chk() {
@@ -90,10 +101,13 @@
         <p style="color:#e9f4fb; text-align: center; font-size:40px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">아이디어를 공유해보세요.</p>
     </div>   
     <div class="write">
-        <p style="text-align: center; font-size:35px; color:#e9f4fb;"><a id="" href="{%url 'new' %}">글 작성하기</a></p>
+        <p style="text-align: center; font-size:35px; color:#e9f4fb;"><a href="{%url 'new' %}">글 작성하기</a></p>
     </div>
     {% endif %}
 
+    <div class="copyright">
+        Copyright © 2021 Mentorink
+    </div>
 </body>
 </html>
 

@@ -11,6 +11,12 @@
             text-decoration-line: none;
             color: black;
             }
+
+        a[id="write"] {
+            text-decoration-line: none;
+            color: #e9f4fb;
+            } 
+
         .list {
             margin-left: 10%;
             margin-right: 10%;
@@ -53,6 +59,21 @@
             cursor: pointer;
             outline: none;
         }
+
+        .write {
+            border: 0px solid;
+            background: #2691d9;
+            border-radius: 10px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            width: 300px;
+            height: 50px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
 </head>
 <body>
@@ -85,20 +106,42 @@
         {% if idea.count > 0 %}
         <p style="font-size:15px; color: #0FBCFF;">{{idea.count}}개의 댓글이 달려있습니다.</p>
         {% endif %}
-        
     </div>
 
     <div class="line"></div>
+
     {% empty %}
     <div class="none">
         <p style="text-align: center; font-size:30px;">{{search}}에 대한 글을 작성해보세요 :)</p>
         <!-- 로그인이 된 상태 -->
         {% if user.is_authenticated %}
-        <p style="text-align: center; font-size:30px;"><a href="{%url 'new' %}">글 작성하기</a></p>
+        <div class="write">
+            <p style="text-align: center; font-size:35px; color:#e9f4fb;"><a id="write" href="{%url 'new' %}">글 작성하기</a></p>
+        </div>
         {% endif %}
     </div>
-    
     {% endfor %}
+    <!-- 로그인이 된 상태 -->
+    <div class="none">
+        <p style="text-align: center; font-size:30px;">원하는 글이 없으신가요?</p>
+        <form name="search" action="{% url 'list' %}" method="POST" style="text-align: center;" onsubmit="return chk();">
+            {% csrf_token %}
+            <div class='input'>
+                <input type="text" id="searchtxt" name="search" style="width:800px; height:70px; font-size:30px;"
+                    placeholder="다른 아이디어를 검색해보세요.">
+                <input type="submit" style="width:80px; height:70px; font-size:30px;" value="검색"></input>
+            </div>
+        </form>
+        {% if user.is_authenticated %}
+        <br>
+        <p style="text-align: center; font-size:30px;">글을 작성해보세요 :)</p>
+    
+        <div class="write">
+            <p style="text-align: center; font-size:35px; color:#e9f4fb;"><a id="write" href="{%url 'new' %}">글 작성하기</a></p>
+        </div>
+        {% endif %}
+        <br><br><br><br>
+    </div>
 </body>
 </html>
 {% endblock %}

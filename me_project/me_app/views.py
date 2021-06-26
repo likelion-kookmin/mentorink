@@ -8,7 +8,6 @@ from account.forms import RegisterForm
 from django.db import models
 from django.conf import settings
 
-
 def main(request):
     return render(request, 'main.html')
 
@@ -36,8 +35,6 @@ def myc(request):
     mycomment = request.POST.get('mycomment')
     comments=Comment.objects.filter(author=request.user)
     return render(request,'myc.html',{'comments': comments})
-
-
 
 def list(request):
     search = request.POST.get('search')

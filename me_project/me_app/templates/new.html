@@ -47,8 +47,8 @@
     <div class="writing page" style="text-align: center;">
     <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data" >
         {%csrf_token%}
-        <p style="font-size: 20px;"> <input type="text" name="title" value="제목을 입력하세요" style="width: 600px;"></p>
-        <p style="font-size: 20px;"> <input type="text" name="writer" value="아이디를 입력하세요" style="width: 400px;"></p>
+        <p style="font-size: 20px;"> <input type="text" name="title" placeholder="제목을 입력하세요." style="width: 600px;"></p>
+        <p style="font-size: 20px;"> <input type="text" name="writer" placeholder="아이디를 입력하세요" style="width: 400px;"></p>
         <br> <textarea name="body" cols="100" rows="16"></textarea><p>
         <p> <input type="file" name="image"></p>
         <input type="submit"></input>
