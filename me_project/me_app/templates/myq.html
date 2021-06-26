@@ -1,6 +1,4 @@
-
-
-
+{{% extends 'sidebar.html' %}
 {% block container %}
 
 <head>
@@ -8,21 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my question page</title>
+    <style>
+      hr{
+        border: #2691d9
+    }  
+    </style>
+    
 </head>
 
 <body>
-    <h1>내가 쓴 글</h1>
-    
+    - 내가 쓴 글<br>
+    <hr>
+    <ol>
     {% for idea in ideas %}
     <div>
-        <a href="{%url 'detail' idea.id%}">
-            <h3>{{idea.title}}</h3>
-        </a>
         
-        {{idea.pud_date}}
+        <br>
+        <a href="{%url 'detail' idea.id%}">
+            <h2><li>{{idea.title}}</li></h2>
+        </a>
+        <ul>
+            <h3>
+        <li>작성자: {{idea.writer}}</li>
+        <li>작성일: {{idea.pud_date}}</li></h3>
+        </ul>
+    
     </div>
-    <hr>
+    
     {% endfor %}
+    </ol>
 </body>
 
 </html>

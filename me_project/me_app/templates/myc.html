@@ -1,3 +1,4 @@
+{% extends 'sidebar.html' %}
 {% block container %}
 
 <head>
@@ -5,24 +6,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my comment page</title>
+    
 </head>
 
 <body>
-    <h1>내가 쓴 comment</h1>
+    
+    
+    - 내가 쓴 comment<br>
+    <hr>
+    <ol>
     {% for comment in comments %}
     <div>
-           {{comment.author}}
-            <h3>제목: {{comment.idea.title}}</h3>
-            작성자: {{user.get_username}}
-        </a>
-        작성한 코멘트:
-        {{comment.message}}
+        <br>
+        <h2><li>
+            작성한 코멘트: {{comment.message}}</h2>
+            <ul>
+                <h3>
+                <li>남긴 글: <a href="{%url 'detail' comment.idea.id%}">{{comment.idea.title}}</a></li></h3>
+                
+            </ul>
+
+        </li>   
+       
+        
+        
         
         
     </div>
-    <hr>
+    
 
     {% endfor %}
+    </ol>
 </body>
 
 </html>
