@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-vy#dbew^y9%w17@$g0#amq%*ublxb)z73n30-6_1&-=mxs)&b4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'account.UserModel'
 
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'me_app',
     'account',
-    ]
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -106,25 +106,29 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+
+LANGUAGE_CODE = 'ko-kr'
+
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[os.path.join(BASE_DIR, 'me_app', 'static')]
-STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'me_app', 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
