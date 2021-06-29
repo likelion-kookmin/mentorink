@@ -11,6 +11,28 @@
   background: #0FBCFF;
 }
 
+.main_link {
+  width: 70px;
+  height: 70px;
+  font-size: 40px;
+  background-color: #ffebee;
+  border: 4px solid #ff8a80;
+  border-radius: 20px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main_link a {
+  text-decoration: none;
+  color: #b39ddb;
+}
+
 .center {
   position: absolute;
   top: 50%;
@@ -111,6 +133,13 @@ input[type="submit"]:hover {
   </style>
 </head>
 <body>
+  <script src="https://kit.fontawesome.com/d736d670df.js" crossorigin="anonymous"></script>
+
+  <div class="main_link">
+    <a href="{% url 'main' %}">
+      <i class="fas fa-home"></i> 
+    </a>
+  </div>
   <div class="center">
     <h1>회원가입</h1>
     <form action="{% url 'signup' %}" method="POST">
