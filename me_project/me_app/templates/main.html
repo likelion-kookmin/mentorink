@@ -86,8 +86,8 @@
         <b><p style="color:#e9f4fb; text-align: center; font-size:60px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Mentorink</p></b>
     </div>
     <br>
-    <form name="search" action="{% url 'list' %}" method="POST" style="text-align: center;" onsubmit="return chk();">
-        {% csrf_token %}
+    <form name="search" action="{% url 'list' %}" method="GET" style="text-align: center;" onsubmit="return chk();">
+        
         <div class='input'>
             <input type="text" id="searchtxt" name="search" style="width:800px; height:70px; font-size:30px;" placeholder="아이디어를 검색하세요.">
             <input type="submit" style="width:80px; height:70px; font-size:30px;" value="검색"></input>
