@@ -105,6 +105,16 @@ form .txt_field {
   width: 100%;
 }
 
+.error {
+  color: red;
+  height: 50px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 input[type="submit"] {
   width: 100%;
@@ -164,10 +174,12 @@ input[type="submit"]:hover {
         {{form.password}}
         <label>Password</label>
       </div>
+      <span class="error">{{error}}</span>
       <input type="submit" value="login">
       <div class="signup_link">
         Not a member? <a href="{% url 'signup' %}">SignUp</a>
       </div>
+      
     </form>
   </div>
 

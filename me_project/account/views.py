@@ -16,8 +16,13 @@ def login_view(request):
                 request=request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                return redirect('main')
+            else:
+                error_message = "에러"
+        else:
+            error_message = "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다."
 
-        return redirect("main")
+        return render(request, 'login.html', {'form': form, 'error': error_message})
 
     else:
         form = AuthenticationForm()
