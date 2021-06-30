@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.db.models import Count
 from django.db.models.fields import NullBooleanField
 from django.forms.fields import ImageField
+from django.db.models import Count
 
 class Idea(models.Model):
     title = models.CharField(max_length=150)

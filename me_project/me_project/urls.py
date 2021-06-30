@@ -4,7 +4,6 @@ from me_app import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
@@ -23,4 +22,3 @@ urlpatterns = [
     path('edit/<int:idea_id>', views.edit, name = 'edit'),
     path('update/<int:idea_id>', views.update, name = 'update'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

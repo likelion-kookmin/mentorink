@@ -10,16 +10,24 @@
         a {
             text-decoration-line: none;
             color: black;
-            }
+        }
+
+        a[id="write"] {
+            text-decoration-line: none;
+            color: #e9f4fb;
+        }
+
         .list {
             margin-left: 10%;
             margin-right: 10%;
             width: 80%;
             /* background: red; */
         }
+
         .list:hover {
             background: #bfdbf0;
         }
+
         .line {
             margin-right: 10%;
             margin-left: 10%;
@@ -29,7 +37,8 @@
             height: 1px;
             width: 80%;
         }
-        .none{
+
+        .none {
             margin-left: 10%;
             margin-right: 10%;
             width: 80%;
@@ -53,52 +62,124 @@
             cursor: pointer;
             outline: none;
         }
+
+        .write {
+            border: 0px solid;
+            background: #2691d9;
+            border-radius: 10px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            width: 300px;
+            height: 50px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
+    <script>
+        function chk() {
+            if (document.getElementById("searchtxt").value == "") {
+                alert("내용을 입력해주세요");
+                return false;
+            }
+            else
+                document.search.submit();
+        }
+    </script>
 </head>
+
 <body>
     <br><br><br>
     {% if count > 0 %}
-    <b><p style="text-align: center; font-size:40px;">{{search}}에 대한 검색 결과가 {{count}}개 검색되었습니다.</p></b>
+    <b>
+        <p style="text-align: center; font-size:40px;">{{search}}에 대한 검색 결과가 {{count}}개 검색되었습니다.</p>
+    </b>
     {% else %}
-    <b><p style="text-align: center; font-size:40px;">{{search}}에 대한 검색 결과가 없습니다.</p></b>
-    <form name="search" action="{% url 'list' %}" method="POST" style="text-align: center;" onsubmit="return chk();">
-        {% csrf_token %}
-        <div class='input'>
-            <input type="text" id="searchtxt" name="search" style="width:800px; height:70px; font-size:30px;" placeholder="다른 아이디어를 검색해보세요.">
-            <input type="submit" style="width:80px; height:70px; font-size:30px;" value="검색"></input>
-        </div>
-    </form>
+    <b>
+        <p style="text-align: center; font-size:40px;">{{search}}에 대한 검색 결과가 없습니다.</p>
+    </b>
     {% endif %}
-   
+
     <div class="line"></div>
 
     {% for idea in ideas %}
-    
+
     <div class="list">
-        <a href="{%url 'detail' idea.id%}" >
-        <b><p style="font-size:30px;">{{idea.title}}</p></b>
-        </a>
-        
+        <p style="font-size:35px;"><a href="{%url 'detail' idea.id%}"><b>{{idea.title}}</b></a></p>
         <p style="font-size:15px; color: gray;">작성자: {{idea.writer}}</p>
         <p style="font-size:15px; color: gray;">작성시간: {{idea.pud_date}}</p>
         <p style="font-size:20px; color: gray;">{{idea.summary}}</p>
         {% if idea.count > 0 %}
-        <p style="font-size:15px; color: #0FBCFF;">{{idea.count}}개의 댓글이 달려있습니다.</p>
+        <p style="font-size:15px; color: #2691d9;">{{idea.count}}개의 댓글이 달렸습니다.</p>
         {% endif %}
-        
     </div>
 
     <div class="line"></div>
-    {% empty %}
-    <div class="none">
-        <p style="text-align: center; font-size:30px;">{{search}}에 대한 글을 작성해보세요 :)</p>
-        <!-- 로그인이 된 상태 -->
-        {% if user.is_authenticated %}
-        <p style="text-align: center; font-size:30px;"><a href="{%url 'new' %}">글 작성하기</a></p>
-        {% endif %}
-    </div>
-    
+
     {% endfor %}
+    <!-- 로그인이 된 상태 -->
+    <div class="none">
+        <p style="text-align: center; font-size:30px;">원하는 글이 없으신가요?</p>
+        <form name="search" action="{% url 'list' %}" method="GET" style="text-align: center;" onsubmit="return chk();">
+            <div class='input'>
+                <input type="text" id="searchtxt" name="search" style="width:800px; height:70px; font-size:30px;"
+                    placeholder="다른 아이디어를 검색해보세요.">
+                <input type="submit" style="width:80px; height:70px; font-size:30px;" value="검색"></input>
+            </div>
+        </form>
+        {% if user.is_authenticated %}
+        <br>
+        <p style="text-align: center; font-size:30px;">글을 작성해보세요 :)</p>
+
+        <div class="write">
+            <p style="text-align: center; font-size:35px; color:#e9f4fb;"><a id="write" href="{%url 'new' %}">글 작성하기</a>
+            </p>
+        </div>
+        {% endif %}
+        <br><br><br><br>
+    </div>
+
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if ideas.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?search={{search}}?page={{ ideas.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in ideas.paginator.page_range %}
+        {% if page_number == ideas.number %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?search={{search}}?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?search={{search}}?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if ideas.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?search={{search}}?page={{ ideas.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+
+    </ul>
+    <!-- 페이징처리 끝 -->
+
 </body>
+
 </html>
 {% endblock %}
