@@ -72,7 +72,7 @@ def create(request):
     if(request.method == 'POST'):
         new_idea = Idea()
         new_idea.title = request.POST['title']
-        new_idea.writer = request.POST['writer']
+        new_idea.writer = request.user
         new_idea.body = request.POST['body']
         new_idea.pud_date = timezone.now()
 
