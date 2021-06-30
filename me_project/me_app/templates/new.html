@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block container %}
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,7 @@
     <title>Write Your Idea</title>
     <style>
         input[type="submit"] {
-            font-size: 20px;
+            font-size: 30px;
             border: 0px solid;
             background: #2691d9;
             border-radius: 10px;
@@ -22,10 +23,8 @@
             border: 0px solid;
             background-color: #e9f4fb;
             border-radius: 4px;
-            color: gray;
-            font-weight: 400;    
+            font-weight: 400;
             outline: none;
-            text-align: center;
         }
 
         textarea {
@@ -33,27 +32,44 @@
             border: 0px solid;
             background-color: #e9f4fb;
             border-radius: 10px;
-            color: gray;
             font-weight: 400;
             outline: none;
-            text-align: center;
+        }
+
+        .line {
+            margin-right: 20%;
+            margin-left: 20%;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            background: #0FBCFF;
+            height: 1px;
+            width: 60%;
         }
     </style>
 </head>
+
 <body>
     <br><br>
-    <h1 style="text-align: center; font-size: 45px; font-weight: 700;">당신만의 기발한 아이디어를 공유해보세요!</h1><br>
-    <br>
     <div class="writing page" style="text-align: center;">
-    <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data" >
-        {%csrf_token%}
-        <p style="font-size: 20px;"> <input type="text" name="title" placeholder="제목을 입력하세요." style="width: 600px;"></p>
-        <p style="font-size: 20px;"> <input type="text" name="writer" placeholder="아이디를 입력하세요" style="width: 400px;"></p>
-        <br> <textarea name="body" cols="100" rows="16"></textarea><p>
-        <p> <input type="file" name="image"></p>
-        <input type="submit"></input>
-        <br><br><br>
-    </form></div>
+        <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class="title">
+                <input type="text" name="title" placeholder="제목을 입력하세요."
+                    style="width:800px; height:70px; font-size:30px;">
+            </div>
+            <div class="line"></div>
+            <input type="text" name="writer" placeholder="아이디를 입력하세요" style="width:800px; height:70px; font-size:20px;">
+            <br><br>
+            사진 추가: <input type="file" name="image">
+            <br><br>
+            <textarea name="body" cols="100" placeholder="당신만의 기발한 아이디어를 공유해보세요!" rows="16"
+                style="font-size:20px;"></textarea>
+            <p>
+                <input type="submit"></input>
+                <br><br><br>
+        </form>
+    </div>
 </body>
+
 </html>
 {% endblock %}

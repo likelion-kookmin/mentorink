@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block container %}
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
             padding-left: 20%;
             padding-right: 20%;
         }
+
         .line {
             margin-top: 30px;
             margin-bottom: 30px;
@@ -18,17 +20,25 @@
             height: 1px;
         }
 
+        .comment {
+            background: #EAEEEE;
+        }
     </style>
 </head>
+
 <body>
     <hr>
 
     <div class="list">
-    <br>
-    <b><p style="font-size:45px;">{{idea.title}}</p></b>
-    <p style="text-align: left; font-size: 15px;">작성자: {{idea.writer}}</p>
-    <p style="text-align: left; font-size: 15px;">작성일: {{idea.pud_date}}</p>
-    <a href="{% url 'edit' idea.id %}" style="text-align: right; 
+        <br>
+        <b>
+            <p style="font-size:45px;">{{idea.title}}</p>
+        </b>
+        <p style="text-align: left; font-size: 15px;">작성자: {{idea.writer}}</p>
+        <p style="text-align: left; font-size: 15px;">작성일: {{idea.pud_date}}</p>
+        <!-- 로그인이 된 상태 -->
+        {% if user.is_authenticated %}
+        <a href="{% url 'edit' idea.id %}" style="text-align: right; 
     font-size: 14px;
     border: 0px solid;
     color: #2691d9;
@@ -37,7 +47,7 @@
     cursor: pointer;
     outline: none;
     text-decoration: none;">글 수정</a> &nbsp;
-    <a href="{% url 'delete' idea.id %}" style="text-align: right;
+        <a href="{% url 'delete' idea.id %}" style="text-align: right;
     font-size: 14px;
     border: 0px solid;
     color: #2691d9;
@@ -46,32 +56,36 @@
     cursor: pointer;
     outline: none;
     text-decoration: none;">글 삭제</a>
-    <div class="line"></div>
-    <br>
-    {% if idea.image %}
-    <img src="{{idea.image.url}}" width="240"><br>
-    {% endif %}
-    <p style="text-align: left; font-size: 25px;">{{idea.body}}</p>
-    <br>
-    <div class="line">
-    </div>
-    <br>
-    {% for comment in comments %} 
-    <div class="comment">
-        <b><p style="text-align: left; font-size: 20px;">{{ comment.author }}님의 댓글</p></b>
-        <p style="text-align: left; font-size: 20px;">작성일: {{ comment.created_at }}</p>
-        <p style="text-align: left; font-size: 20px;">{{ comment.message }}</p>
-    </div>
-    <div class="line"></div>
-    {% empty %}
-    <p>작성된 댓글이 없습니다.</p>
-    {% endfor %}
+        {% endif %}
+        <div class="line"></div>
+        <br>
+        {% if idea.image %}
+        <img src="{{idea.image.url}}" width="240"><br>
+        {% endif %}
+        <p style="text-align: left; font-size: 25px;">{{idea.body}}</p>
+        <br>
+        <div class="line">
+        </div>
+        <br>
+        {% for comment in comments %}
+        <div class="comment">
+            <b>
+                <p style="text-align: left; font-size: 20px;">{{ comment.author }}님의 댓글</p>
+            </b>
+            <p style="text-align: left; font-size: 15px;">작성일: {{ comment.created_at }}</p>
+            <p style="text-align: left; font-size: 20px;">{{ comment.message }}</p>
+        </div>
+        <div class="line"></div>
+        {% empty %}
+        <p>작성된 댓글이 없습니다.</p>
+        {% endfor %}
 
-    <!-- 로그인이 된 상태 -->
-    {% if user.is_authenticated %}
-    <a class="btn btn-default" href="{% url 'add_comment_to_idea' idea.id %}">Add comment</a>
-    {% endif %}
+        <!-- 로그인이 된 상태 -->
+        {% if user.is_authenticated %}
+        <a class="btn btn-default" href="{% url 'add_comment_to_idea' idea.id %}">Add comment</a>
+        {% endif %}
     </div>
 </body>
+
 </html>
 {% endblock %}
