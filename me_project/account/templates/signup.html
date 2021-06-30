@@ -102,6 +102,17 @@ form .txt_field {
   width: 100%;
 }
 
+.error {
+  color: red;
+  height: 50px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .position_field {
     margin-bottom: 20px;
 }
@@ -110,6 +121,8 @@ form .txt_field {
     font-weight: 700;
     margin-left: 15px;
 }
+
+
 
 
 input[type="submit"] {
@@ -160,6 +173,7 @@ input[type="submit"]:hover {
         {{form.nickname}}
         <label>Nickname</label>
       </div>
+      <span class="error">{{error}}</span>
       <div class="position_field">
         {{form.position}}
         <span class="position_ment">전문가인지 일반유저인지 선택해주세요!</span>

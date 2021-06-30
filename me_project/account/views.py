@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import RegisterForm
+from .models import UserModel
 
 # Create your views here.
 
@@ -37,6 +38,12 @@ def logout_view(request):
 def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
+        if UserModel.objects.filter(username=request.POST['username']).exists():
+            error = "이미 등록된 Username입니다"
+            return render(request, 'signup.html', {'form': form, 'error': error})
+        if request.POST['password1'] != request.POST['password2']:
+            error = "비밀번호가 서로 다릅니다"
+            return render(request, 'signup.html', {'form': form, 'error': error})
         if form.is_valid():
             user = form.save()
             login(request, user)
