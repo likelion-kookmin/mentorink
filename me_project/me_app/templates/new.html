@@ -6,19 +6,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Write Your Idea</title>
-    <style></style>
+    <style>
+       input[type="submit"] {
+            font-size: 30px;
+            border: 0px solid;
+            background: #2691d9;
+            border-radius: 10px;
+            color: #e9f4fb;
+            font-weight: 400;
+            outline: none;
+        }
+
+        input[type="text"] {
+            font-size: 18px;
+            border: 0px solid;
+            background-color: #e9f4fb;
+            border-radius: 4px;
+            font-weight: 400;
+            outline: none;
+        }
+    
+        textarea {
+            font-size: 18px;
+            border: 0px solid;
+            background-color: #e9f4fb;
+            border-radius: 10px;
+            font-weight: 400;
+            outline: none;
+        }
+    
+        .line {
+            margin-right: 20%;
+            margin-left: 20%;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            background: #0FBCFF;
+            height: 1px;
+            width: 60%;
+        }
+    </style>
 </head>
 <body>
     <br><br>
-    <h1 style="text-align: center; font-size: 50px;">당신만의 기발한 아이디어를 공유해 보세요!</h1><br>
     <div class="writing page" style="text-align: center;">
-    <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data" >
+    <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data">
         {%csrf_token%}
-        <p>제목 <input type="text" name="title" style="width: 300px;"></p>
-        <p>사진첨부 <input type="file" name="image"></p>
-        <br> <textarea name="body" cols="100" rows="16" ></textarea><p>
-        <button type="submit"> submit </button>
-    </form></div>
+        <div class="title">
+            <input type="text" name="title" placeholder="제목을 입력하세요." style="width:800px; height:70px; font-size:30px;">
+        </div>
+        <div class="line"></div>
+        사진 추가: <input type="file" name="image">
+        <br><br>
+        <textarea name="body" cols="100" placeholder="당신만의 기발한 아이디어를 공유해보세요!" rows="16" style="font-size:20px;"></textarea>
+        <p></p>
+            <input type="submit"></input>
+            <br><br><br>
+    </form>
+    </div>
+    </div>
 </body>
 </html>
 {% endblock %}
