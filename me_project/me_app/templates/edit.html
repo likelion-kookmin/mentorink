@@ -45,20 +45,30 @@
             width: 60%;
         }
     </style>
+    <script>
+        function chk() {
+            if (document.getElementById("title").value == "" || document.getElementById("body").value == "") {
+                alert("내용을 입력해주세요");
+                return false;
+            }
+            else
+                document.search.submit();
+        }
+    </script>
 </head>
 <body>
     
     <br><br>
     <div class="writing page" style="text-align: center;">
-    <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data">
+    <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data" onsubmit="return chk();">
         {%csrf_token%}
         <div class="title">
-            <input type="text" name="title" value="{{idea.title}}" placeholder="제목을 입력하세요." style="width:800px; height:70px; font-size:30px;">
+            <input type="text" name="title" value="{{idea.title}}" id="title" placeholder="제목을 입력하세요." style="width:800px; height:70px; font-size:30px;">
         </div>
         <br>
         사진 추가: <input type="file" name="image">
         <br><br>
-        <textarea name="body" cols="100" placeholder="당신만의 기발한 아이디어를 공유해보세요!" rows="16"
+        <textarea name="body" cols="100" id="body" placeholder="당신만의 기발한 아이디어를 공유해보세요!" rows="16"
             style="font-size:20px;">{{idea.body}}</textarea>
         <p></p>
         <input type="submit"></input>
